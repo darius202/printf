@@ -1,5 +1,5 @@
-#ifndef HOLBERTON_H
-#define HOLBERTON_H
+#ifndef MAIN_H
+#define MAIN_H
 
 #include <stdarg.h>
 #include <stdlib.h>
@@ -57,4 +57,4 @@ void p_UHEX(unsigned int, int *);
 void print_pointer(va_list *, int, int *count);
 void p_ptr(char *, int *);
 
-#endif /* HOLBERTON_H */
+#endif /* MAIN_H */
