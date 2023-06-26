@@ -1,60 +1,36 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef HOLBERTON_H
+#define HOLBERTON_H
 
 #include <stdarg.h>
+#include <stddef.h>
 #include <stdlib.h>
 
 /**
- * struct special_formats - Struct to select specifiers
+ * struct structprint - structure containing
+ * @q: the location and method to translate data to characters.
+ * @u: print function for specific type.
  *
- * @c: data type
- * @f: The function associated
+ * Return: int
  */
-typedef struct special_formats
+typedef struct structprint
 {
-	char *c;
-	void (*f)(va_list *, int, int *);
-} s_format;
+	char *q;
+	int (*u)(char *format, va_list);
+} structype;
 
-/**
- * union pointer - union variable to handle pointer byte to byte
- * @ptr: void pointer to store a pointer.
- * @c: char array to handle each byte in ptr.
- */
-typedef union pointer
-{
-	void *ptr;
-	char c[sizeof(void *)];
-} my_pointer;
-
-int _printf(const char *, ...);
-int check_input(const char *format, va_list *);
-int print_output(const char *format, va_list *);
-int check_for_format(char, va_list *, int, int *count);
-void print_char(va_list *, int, int *);
-int _putchar(char c);
-void print_string(va_list *, int, int *);
-void _puts(char *, int *);
-void print_int(va_list *, int, int *);
-void print_number(int, int *);
-
-/* Advanced */
-
-void print_string_reverse(va_list *, int, int *count);
-void print_rev(char *s, int *count);
-void print_string_rot13(va_list *, int, int *count);
-void rot13(char *s, int *count);
-void print_bin(va_list *, int, int *count);
-void p_bin(unsigned int, int *);
-void print_octal(va_list *, int, int *count);
-void p_octal(unsigned int, int *);
-void print_uint(va_list *, int, int *count);
-void p_uint(unsigned int, int *);
-void print_uhex(va_list *, int, int *count);
-void p_uhex(unsigned int, int *);
-void print_UHEX(va_list *, int, int *count);
-void p_UHEX(unsigned int, int *);
-void print_pointer(va_list *, int, int *count);
-void p_ptr(char *, int *);
-
-#endif /* MAIN_H */
+int _putchar(char ch);
+int _puts(char *string);
+int printc(char *format, va_list);
+int printstr(char *format, va_list);
+int (*driver(char *format))(char *format, va_list);
+int _printf(char *format, ...);
+int printint(char *format, va_list pa);
+int integer(int number);
+int contadordigit(int number);
+int _abs(int number);
+int printpercent(char *format, va_list pa);
+int printhex(char *format, va_list);
+int printHEX(char *format, va_list);
+int printocta(char *format, va_list);
+int print_unsign(char *format, va_list);
+#endif

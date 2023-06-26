@@ -2,17 +2,19 @@
 
 /**
  * _puts - prints a string
- * @s: input string to be printed
- * @count: printing bytes count.
- *
- * Return: void
+ * new line, to stdout.
+ * @string: input string
+ * Return: count of string.
  */
-
-void _puts(char *s, int *count)
+int _puts(char *string)
 {
-	while (*s != '\0')
+	int contador = 0;
+
+	while (*string)
 	{
-		_putchar(*s++);
-		*count = *count + 1;
+		_putchar(*string);
+		string++;
+		contador++;
 	}
+	return (contador);
 }

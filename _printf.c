@@ -1,51 +1,50 @@
-#include <stdarg.h>
-#include <unistd.h>
+#include "holberton.h"
 
-int _printf(const char *format, ...)
+/**
+ * _printf - prints formatted data to stdout
+ * @format: string that contains the format to print
+ * Return: number of characters written
+ */
+int _printf(char *format, ...)
 {
-    va_list args;
-    va_start(args, format);
+	int written = 0, (*structype)(char *, va_list);
+	char q[3];
+	va_list pa;
 
-    int count = 0;
-    for (int i = 0; format[i] != '\0'; i++)
-    {
-        if (format[i] != '%')
-        {
-            write(1, &format[i], 1);
-            count++;
-        }
-        else
-        {
-            i++;
-            switch (format[i])
-            {
-                case 'c':
-                {
-                    char c = va_arg(args, int);
-                    write(1, &c, 1);
-                    count++;
-                    break;
-                }
-                case 's':
-                {
-                    char *s = va_arg(args, char *);
-                    for (int j = 0; s[j] != '\0'; j++)
-                    {
-                        write(1, &s[j], 1);
-                        count++;
-                    }
-                    break;
-                }
-                case '%':
-                {
-                    write(1, "%", 1);
-                    count++;
-                    break;
-                }
-            }
-        }
-    }
-
-    va_end(args);
-    return count;
+	if (format == NULL)
+		return (-1);
+	q[2] = '\0';
+	va_start(pa, format);
+	_putchar(-1);
+	while (format[0])
+	{
+		if (format[0] == '%')
+		{
+			structype = driver(format);
+			if (structype)
+			{
+				q[0] = '%';
+				q[1] = format[1];
+				written += structype(q, pa);
+			}
+			else if (format[1] != '\0')
+			{
+				written += _putchar('%');
+				written += _putchar(format[1]);
+			}
+			else
+			{
+				written += _putchar('%');
+				break;
+			}
+			format += 2;
+		}
+		else
+		{
+			written += _putchar(format[0]);
+			format++;
+		}
+	}
+	_putchar(-2);
+	return (written);
 }
